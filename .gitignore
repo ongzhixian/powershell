@@ -288,3 +288,5 @@ __pycache__/
 *.xsd.cs
 secure-content/*.secure
 secure-content/azure-credentials.ps1
+ako.ps1
+local_dev/**
