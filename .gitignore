@@ -288,5 +288,6 @@ __pycache__/
 *.xsd.cs
 secure-content/*.secure
 secure-content/*-credentials.ps1
+secure-content/*-preferences.ps1
 ako.ps1
 local_dev/**
