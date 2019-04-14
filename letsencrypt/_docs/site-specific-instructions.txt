@@ -1,0 +1,156 @@
+New-ACMEIdentifier -Dns plato.emptool.com                   -Alias plato_dns
+
+Complete-ACMEChallenge plato_dns -ChallengeType http-01 -Handler manual
+
+... follow instructions
+(Get-ACMEIdentifier plato_dns).Challenges[2].HandlerHandleMessage
+  * HTTP URL:     [http://plato.emptool.com/.well-known/acme-challenge/2MqGRs7ec23QVeRo7RiErR6t0eLsAHEo4uc1POqHwGg]
+  * File Path:    [.well-known/acme-challenge/2MqGRs7ec23QVeRo7RiErR6t0eLsAHEo4uc1POqHwGg]
+  * File Content: [2MqGRs7ec23QVeRo7RiErR6t0eLsAHEo4uc1POqHwGg.HYlIB94pnYUHnGHcdh5WUUMR4H6FfjIs-QnxntpO-mk]
+
+Submit-ACMEChallenge plato_dns -ChallengeType http-01
+(Update-ACMEIdentifier plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}
+((Update-ACMEIdentifier plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}).status
+
+New-ACMECertificate plato_dns -Generate -Alias plato_dns_cert1
+Submit-ACMECertificate plato_dns_cert1
+Update-ACMECertificate plato_dns_cert1
+
+
+Get-ACMECertificate plato_dns_cert1 -ExportKeyPEM           "C:\src\certs\plato_dns_cert1.key.pem"
+Get-ACMECertificate plato_dns_cert1 -ExportCertificatePEM   "C:\src\certs\plato_dns_cert1.crt.pem"
+Get-ACMECertificate plato_dns_cert1 -ExportIssuerPEM        "C:\src\certs\plato_dns_cert1-issuer.crt.pem"
+
+Add-Content -Value (Get-Content "C:\src\certs\plato_dns_cert1.crt.pem")        -Path "C:\src\certs\haproxy.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\plato_dns_cert1-issuer.crt.pem") -Path "C:\src\certs\haproxy.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\plato_dns_cert1.key.pem")        -Path "C:\src\certs\haproxy.plato.emptool.com.pem"
+
+
+--------------------------------------------------------------------------------
+New-ACMEIdentifier -Dns plato-trading-bot.plato.emptool.com -Alias plato_trading_bot_plato_dns
+
+Complete-ACMEChallenge plato_trading_bot_plato_dns -ChallengeType http-01 -Handler manual
+
+... follow instructions
+(Get-ACMEIdentifier plato_trading_bot_plato_dns).Challenges[2].HandlerHandleMessage
+  * HTTP URL:     [http://plato-trading-bot.plato.emptool.com/.well-known/acme-challenge/GbovmOg8HLpVirarCqSoC-0qSo2z_KTnSebCfgMzyp0]
+  * File Path:    [.well-known/acme-challenge/GbovmOg8HLpVirarCqSoC-0qSo2z_KTnSebCfgMzyp0]
+  * File Content: [GbovmOg8HLpVirarCqSoC-0qSo2z_KTnSebCfgMzyp0.HYlIB94pnYUHnGHcdh5WUUMR4H6FfjIs-QnxntpO-mk]
+  
+Submit-ACMEChallenge plato_trading_bot_plato_dns -ChallengeType http-01
+(Update-ACMEIdentifier plato_trading_bot_plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}
+((Update-ACMEIdentifier plato_trading_bot_plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}).status
+
+New-ACMECertificate plato_dns -Generate -Alias plato_trading_bot_plato_dns_cert1
+Submit-ACMECertificate plato_trading_bot_plato_dns_cert1
+Update-ACMECertificate plato_trading_bot_plato_dns_cert1
+
+* NGINX *
+
+Get-ACMECertificate plato_trading_bot_plato_dns_cert1 -ExportKeyPEM           "C:\src\certs\plato_trading_bot_plato_dns_cert1.key.pem"
+Get-ACMECertificate plato_trading_bot_plato_dns_cert1 -ExportCertificatePEM   "C:\src\certs\plato_trading_bot_plato_dns_cert1.crt.pem"
+Get-ACMECertificate plato_trading_bot_plato_dns_cert1 -ExportIssuerPEM        "C:\src\certs\plato_trading_bot_plato_dns_cert1-issuer.crt.pem"
+
+Add-Content -Value (Get-Content "C:\src\certs\plato_trading_bot_plato_dns_cert1.crt.pem")        -Path "C:\src\certs\haproxy.plato-trading-bot.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\plato_trading_bot_plato_dns_cert1-issuer.crt.pem") -Path "C:\src\certs\haproxy.plato-trading-bot.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\plato_trading_bot_plato_dns_cert1.key.pem")        -Path "C:\src\certs\haproxy.plato-trading-bot.plato.emptool.com.pem"
+
+--------------------------------------------------------------------------------
+New-ACMEIdentifier -Dns brahman-devops.plato.emptool.com    -Alias brahman_devops_plato_dns
+
+Complete-ACMEChallenge brahman_devops_plato_dns -ChallengeType http-01 -Handler manual
+
+... follow instructions
+((Get-ACMEIdentifier brahman_devops_plato_dns).Challenges | Where-Object {$_.Type -eq "http-01"}).HandlerHandleMessage
+  * HTTP URL:     [http://brahman-devops.plato.emptool.com/.well-known/acme-challenge/LYQWuTwtFsf_Ipofa3WPVL2gm361eSk83a4gvqLuVwM]
+  * File Path:    [.well-known/acme-challenge/LYQWuTwtFsf_Ipofa3WPVL2gm361eSk83a4gvqLuVwM]
+  * File Content: [LYQWuTwtFsf_Ipofa3WPVL2gm361eSk83a4gvqLuVwM.HYlIB94pnYUHnGHcdh5WUUMR4H6FfjIs-QnxntpO-mk]
+
+
+Submit-ACMEChallenge brahman_devops_plato_dns -ChallengeType http-01
+((Update-ACMEIdentifier brahman_devops_plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}).status
+
+New-ACMECertificate plato_dns -Generate -Alias brahman_devops_plato_dns_cert1
+Submit-ACMECertificate brahman_devops_plato_dns_cert1
+Update-ACMECertificate brahman_devops_plato_dns_cert1
+
+* NGINX *
+
+Get-ACMECertificate brahman_devops_plato_dns_cert1 -ExportKeyPEM           "C:\src\certs\brahman_devops_plato_dns_cert1.key.pem"
+Get-ACMECertificate brahman_devops_plato_dns_cert1 -ExportCertificatePEM   "C:\src\certs\brahman_devops_plato_dns_cert1.crt.pem"
+Get-ACMECertificate brahman_devops_plato_dns_cert1 -ExportIssuerPEM        "C:\src\certs\brahman_devops_plato_dns_cert1-issuer.crt.pem"
+
+Add-Content -Value (Get-Content "C:\src\certs\brahman_devops_plato_dns_cert1.crt.pem")        -Path "C:\src\certs\haproxy.brahman-devops.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\brahman_devops_plato_dns_cert1-issuer.crt.pem") -Path "C:\src\certs\haproxy.brahman-devops.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\brahman_devops_plato_dns_cert1.key.pem")        -Path "C:\src\certs\haproxy.brahman-devops.plato.emptool.com.pem"
+
+
+--------------------------------------------------------------------------------
+New-ACMEIdentifier -Dns plato-dev-bot.plato.emptool.com     -Alias plato_dev_bot_plato_dns
+
+Complete-ACMEChallenge plato_dev_bot_plato_dns -ChallengeType http-01 -Handler manual
+
+... follow instructions
+((Get-ACMEIdentifier plato_dev_bot_plato_dns).Challenges | Where-Object {$_.Type -eq "http-01"}).HandlerHandleMessage
+  * HTTP URL:     [http://plato-dev-bot.plato.emptool.com/.well-known/acme-challenge/9vjWyxZQ8sTv5dudlJ-q7sXlwONq3JSbbxDKVSKCe8E]
+  * File Path:    [.well-known/acme-challenge/9vjWyxZQ8sTv5dudlJ-q7sXlwONq3JSbbxDKVSKCe8E]
+  * File Content: [9vjWyxZQ8sTv5dudlJ-q7sXlwONq3JSbbxDKVSKCe8E.HYlIB94pnYUHnGHcdh5WUUMR4H6FfjIs-QnxntpO-mk]
+
+
+
+Submit-ACMEChallenge plato_dev_bot_plato_dns -ChallengeType http-01
+((Update-ACMEIdentifier plato_dev_bot_plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}).status
+
+New-ACMECertificate plato_dns -Generate -Alias plato_dev_bot_plato_dns_cert1
+Submit-ACMECertificate plato_dev_bot_plato_dns_cert1
+Update-ACMECertificate plato_dev_bot_plato_dns_cert1
+
+* NGINX *
+
+Get-ACMECertificate plato_dev_bot_plato_dns_cert1 -ExportKeyPEM           "C:\src\certs\plato_dev_bot_plato_dns_cert1.key.pem"
+Get-ACMECertificate plato_dev_bot_plato_dns_cert1 -ExportCertificatePEM   "C:\src\certs\plato_dev_bot_plato_dns_cert1.crt.pem"
+Get-ACMECertificate plato_dev_bot_plato_dns_cert1 -ExportIssuerPEM        "C:\src\certs\plato_dev_bot_plato_dns_cert1-issuer.crt.pem"
+
+Add-Content -Value (Get-Content "C:\src\certs\plato_dev_bot_plato_dns_cert1.crt.pem")        -Path "C:\src\certs\haproxy.plato-dev-bot.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\plato_dev_bot_plato_dns_cert1-issuer.crt.pem") -Path "C:\src\certs\haproxy.plato-dev-bot.plato.emptool.com.pem"
+Add-Content -Value (Get-Content "C:\src\certs\plato_dev_bot_plato_dns_cert1.key.pem")        -Path "C:\src\certs\haproxy.plato-dev-bot.plato.emptool.com.pem"
+
+--------------------------------------------------------------------------------
+New-ACMEIdentifier -Dns wordpress.plato.emptool.com         -Alias wordpress_plato_dns
+
+Complete-ACMEChallenge wordpress_plato_dns -ChallengeType http-01 -Handler manual
+
+... follow instructions
+
+((Get-ACMEIdentifier wordpress_plato_dns).Challenges | Where-Object {$_.Type -eq "http-01"}).HandlerHandleMessage
+  * HTTP URL:     [http://wordpress.plato.emptool.com/.well-known/acme-challenge/FtKjJxWzB3ZEj9Dgv-_18yaDA66n-zlFCJED9DhWfuU]
+  * File Path:    [.well-known/acme-challenge/FtKjJxWzB3ZEj9Dgv-_18yaDA66n-zlFCJED9DhWfuU]
+  * File Content: [FtKjJxWzB3ZEj9Dgv-_18yaDA66n-zlFCJED9DhWfuU.HYlIB94pnYUHnGHcdh5WUUMR4H6FfjIs-QnxntpO-mk]
+
+Submit-ACMEChallenge wordpress_plato_dns -ChallengeType http-01
+((Update-ACMEIdentifier wordpress_plato_dns -ChallengeType http-01).Challenges | Where-Object {$_.Type -eq "http-01"}).status
+
+New-ACMECertificate plato_dns -Generate -Alias wordpress_plato_dns_cert1
+Submit-ACMECertificate wordpress_plato_dns_cert1
+
+PS C:\src\github.com\ongzhixian\powershell\letsencrypt> Submit-ACMECertificate wordpress_plato_dns_cert1                
+Submit-ACMECertificate : Error creating new cert :: too many certificates already issued for exact set of domains:      
+plato.emptool.com: see https://letsencrypt.org/docs/rate-limits/                                                        
+At line:1 char:1                                                                                                        
++ Submit-ACMECertificate wordpress_plato_dns_cert1                                                                      
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                                          
++ CategoryInfo          : ResourceBusy: (ACMESharp.Vault.Model.CertificateInfo:CertificateInfo) [Submit-ACMECertificate], AcmeWebException                                                                                                 
++ FullyQualifiedErrorId : urn:acme:error:rateLimited (429),ACMESharp.POSH.SubmitCertificate                         
+
+
+Update-ACMECertificate wordpress_plato_dns_cert1
+
+* NGINX *
+
+Get-ACMECertificate plato_dev_bot_plato_dns_cert1 -ExportKeyPEM           "C:\src\certs\plato_dev_bot_plato_dns_cert1.key.pem"
+Get-ACMECertificate plato_dev_bot_plato_dns_cert1 -ExportCertificatePEM   "C:\src\certs\plato_dev_bot_plato_dns_cert1.crt.pem"
+Get-ACMECertificate plato_dev_bot_plato_dns_cert1 -ExportIssuerPEM        "C:\src\certs\plato_dev_bot_plato_dns_cert1-issuer.crt.pem"
+
+Add-Content -Value (Get-Content plato_dev_bot_plato_dns_cert1.crt.pem)        -Path haproxy.plato-dev-bot.plato.emptool.com.pem
+Add-Content -Value (Get-Content plato_dev_bot_plato_dns_cert1-issuer.crt.pem) -Path haproxy.plato-dev-bot.plato.emptool.com.pem
+Add-Content -Value (Get-Content plato_dev_bot_plato_dns_cert1.key.pem)        -Path haproxy.plato-dev-bot.plato.emptool.com.pem
