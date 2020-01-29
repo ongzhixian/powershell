@@ -1,0 +1,7 @@
+/var/www/empere/certs/haproxy.plato_multi_name_cert.pem plato.emptool.com plato-trading-bot.plato.emptool.com brahman-devops.plato.emptool.com plato-dev-bot.plato.emptool.com wordpress.plato.emptool.com empere.plato.emptool.com csi.plato.emptool.com
+
+#/var/www/plato/certs/haproxy.plato.emptool.com.pem plato.emptool.com
+#/var/www/brahman-devops/certs/haproxy.brahman-devops.plato.emptool.com.pem brahman-devops.plato.emptool.com
+#/var/www/plato-dev-bot/certs/haproxy.plato-dev-bot.plato.emptool.com.pem plato-dev-bot.plato.emptool.com
+#/var/www/plato-trading-bot/certs/haproxy.plato-trading-bot.plato.emptool.com.pem plato-trading-bot.plato.emptool.com
+#/var/www/csi/certs/haproxy.csi.plato.emptool.com.pem csi.plato.emptool.com
