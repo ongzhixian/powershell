@@ -35,6 +35,12 @@ certbot-auto certonly --manual -d plato.emptool.com -d plato-dev-bot.plato.empto
 
 haproxy.plato_multi_name_cert.pem
 
+# For deployment to Plato's HAPROXY, the private key needs to be concatentate to the cert.
+
+cat example.com.crt example.com.key > example.com.pem
+
+cat /etc/letsencrypt/live/plato-dev-bot.plato.emptool.com/fullchain.pem /etc/letsencrypt/live/plato-dev-bot.plato.emptool.com/privkey.pem > haproxy.plato_multi_name_cert.pem
+
 ## Logs
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
