@@ -1,0 +1,11 @@
+run_sonar=True
+nuget_restore=true
+git_logcount_all=false
+Configuration=Release
+nuget_deploy_project_list=GlobalBlue.Peripherals.AugustaSecureCardReader=AugustaSecureCardReader
+dotnet_test=true
+resharper=true
+resharper_verbose=true
+resharper_fail_on_issue_type=MAJOR
+resharper_settings_package=Globalblue.Jupiter.ResharperSettings
+resharper_settings_version=0.0.14
